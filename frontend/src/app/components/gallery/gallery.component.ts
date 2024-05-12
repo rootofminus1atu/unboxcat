@@ -4,6 +4,7 @@ import { Result } from 'neverthrow';
 import { Cat } from '../../interfaces/cat';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Observable, filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-gallery',
@@ -13,20 +14,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './gallery.component.css'
 })
 export class GalleryComponent {
-  cats!: Result<Cat[], string>
   filters: string[] = ['COMMON', 'RARE', 'LEGENDARY', 'MYTHIC']
   selectedFilters = [...this.filters]
-  // selectedCats = // i think itd be easier if cats was a stream, and so we could pipe the filters through it
+  cats$: Observable<Result<Cat[], string>> = this.catApiService.getAllCats()
+  selectedCats$ = this.cats$.pipe(
+    map(res => res.map(cats => cats.filter(cat => this.selectedFilters.includes(cat.rarity))))
+  )
 
   constructor(private catApiService: CatApiService) {}
-
-  ngOnInit() {
-    this.fetchCats()
-  }
-
-  fetchCats() {
-    this.catApiService.getAllCats().subscribe(data => this.cats = data)
-  }
 
   updateFilters(filter: string, event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked
@@ -36,6 +31,11 @@ export class GalleryComponent {
       this.selectedFilters = this.selectedFilters.filter(f => f !== filter);
     }
     console.log(this.selectedFilters)
+
+    // adding this seems to be working, but that causes a re-fetch which i dont want
+    this.selectedCats$ = this.cats$.pipe(
+      map(res => res.map(cats => cats.filter(cat => this.selectedFilters.includes(cat.rarity))))
+    )
   }
 
 }

@@ -13,6 +13,22 @@
     </div>
 }
 
+<ng-container>
+    <div *ngIf="selectedCats$ | async as cats; else loading">
+        @if(cats.isOk()) {
+            @for (cat of cats.value; track $index) {
+                <p>{{ cat.fullName }}</p>
+            }
+        } @else {
+            oh no error
+        }
+    </div>
+    <ng-template #loading>
+        loading
+    </ng-template>
+</ng-container>
+
+<!--
 <div>
     @if (!cats) {
         <p>loading...</p>
@@ -24,3 +40,4 @@
         <p>error :(</p>
     }
 </div>
+-->
