@@ -1,4 +1,4 @@
-interface Breed {
+export interface Breed {
     id: string;
     name: string;
     temperament: string[];
@@ -10,7 +10,7 @@ interface Breed {
     _id: string;
 }
 
-interface Cat {
+export interface Cat {
     _id: string;
     imgUrl: string;
     breed: Breed;

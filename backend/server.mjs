@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import { catRoutes } from './cat/controller.mjs'
+import cors from 'cors'
 
 dotenv.config()
 const port = process.env.PORT || 3000
@@ -15,6 +16,7 @@ if (!mongoUri || !apiKey) {
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()

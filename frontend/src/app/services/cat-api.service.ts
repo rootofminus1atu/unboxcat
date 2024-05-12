@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Result, err, ok } from 'neverthrow';
 import { Observable, catchError, map, of, tap } from 'rxjs';
+import { Cat } from '../interfaces/cat';
 
 @Injectable({
   providedIn: 'root'
