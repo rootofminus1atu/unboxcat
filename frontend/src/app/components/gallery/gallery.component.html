@@ -8,7 +8,7 @@
     <div class="form-control flex items-center">
         <label class="label cursor-pointer">
             <span class="label-text">{{ filter | titlecase }}</span> 
-            <input type="checkbox" class="checkbox mx-2" [checked]="selectedFilters.includes(filter)" (change)="updateFilters(filter, $event)" />
+            <input type="checkbox" class="checkbox mx-2" [checked]="selectedFilters.value.includes(filter)" (change)="updateFilters(filter, $event)" />
         </label>
     </div>
 }
@@ -17,7 +17,7 @@
     <div *ngIf="selectedCats$ | async as cats; else loading">
         @if(cats.isOk()) {
             @for (cat of cats.value; track $index) {
-                <p>{{ cat.fullName }}</p>
+                <app-cat-card [cat]="cat"></app-cat-card>
             }
         } @else {
             oh no error
