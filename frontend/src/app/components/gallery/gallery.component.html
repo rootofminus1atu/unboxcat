@@ -14,10 +14,15 @@
 }
 
 <ng-container>
-    <div *ngIf="selectedCats$ | async as cats; else loading">
+    <div 
+        *ngIf="selectedCats$ | async as cats; else loading" 
+        class="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 p-8"
+    >
         @if(cats.isOk()) {
             @for (cat of cats.value; track $index) {
-                <app-cat-card [cat]="cat"></app-cat-card>
+                <div class="flex justify-center">
+                    <app-cat-card class="w-full aspect-square" [cat]="cat"></app-cat-card>
+                </div>
             }
         } @else {
             oh no error
