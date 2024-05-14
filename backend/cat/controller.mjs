@@ -8,7 +8,7 @@ import { ObjectId } from 'bson'
 export const catRoutes = express.Router()
     .get('/', getAllCats)
     .get('/:id', getCat)
-    .get('/random', getRandomCat)
+    .post('/random', getRandomCat)
 
 
 async function getAllCats(req, res) {

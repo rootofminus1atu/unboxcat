@@ -1,20 +1,33 @@
-<div class="text-center p-8 flex items-center justify-center flex-wrap">
+<div class="text-center pt-8">
   <h1 class="text-5xl font-semibold py-4">Welcome to UnboxCat!</h1>
+  <p>To unbox a cat click the <span class="font-semibold">Unbox</span> button down below!</p>
 </div>
 
-<div>
-  <p>unbox</p>
+<div class="flex items-center flex-col gap-4 py-16">
+  <div class="text-center">
+    <p><span class="font-semibold">You unboxed:</span> {{ !isHidden ? cat?.fullName : '' }}</p>
+    <p><span class="font-semibold">Rarity:</span> {{ !isHidden ? cat?.rarity : '' }}</p>
+  </div>
 
   <div
-    style="background-image: url('{{ catImageUrl }}');"
-    class="h-40 w-40 border-2 border-red-500 inset-0 bg-center bg-cover"
+    style="background-image: url('{{ cat?.imgUrl }}');"
+    class="w-10/12 xs:w-10/12 sm:w-9/12 md:w-8/12 lg:w-6/12 xl:w-4/12 aspect-square border-2 border-[#2b3440] rounded-md inset-0 bg-center bg-cover"
+    [class]="!isHidden ? getCatClass() : ''"
   >
-    @if (!catRevealed) {
-      <div class="bg-black text-white">{{ countdown }}</div>
+    @if (isHidden) {
+      <div class="bg-black text-white flex justify-center items-center h-full">
+        @if (errorMsg === null) {
+          <p>{{ countdown }}</p>
+        } @else { 
+          <p>Unboxing encountered an error: {{ errorMsg }}. Try some other time :(</p>
+        }
+      </div>
     }
     
   </div>
 
-  <button class="btn btn-neutral" (click)="unbox()" [disabled]="fetchingImage">Unbox</button>
+  <button class="btn btn-neutral" (click)="unbox()" [disabled]="!canUnbox">Unbox</button>
+
+  <p class="py-8">You can check out all the cats that have been discovered so far on the <span class="font-semibold">Gallery</span> page</p>
 </div>
 

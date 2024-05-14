@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { finalize } from 'rxjs';
 import { CatApiService } from '../../services/cat-api.service';
+import { Cat } from '../../interfaces/cat';
 
 @Component({
   selector: 'app-home',
@@ -14,44 +15,67 @@ import { CatApiService } from '../../services/cat-api.service';
 })
 export class HomeComponent {
   countdown: number = 0
-  catImageUrl: string = ''
-  fetchingImage: boolean = false
-  catRevealed: boolean = false
+  cat: Cat | null = null 
+  isFetching: boolean = false
+  isHidden: boolean = true
+  canUnbox: boolean = true
+  errorMsg: string | null = null
 
   constructor(private catApiService: CatApiService) { }
 
-  // have a countdown simulataneously, and whn its over set catRevealed to true
-
   unbox() {
-    this.fetchingImage = true
-    this.catRevealed = false
+    this.isHidden = true
+    this.canUnbox = false
+    this.cat = null
     this.startCountdown()
-    this.catApiService.getRandomCatMock().pipe( 
-      finalize(() => { 
-        console.log('finalize')
-        this.fetchingImage = false;
-      }) 
-    ).subscribe(c => {
-      c.match(
-        ({ url }) => { 
-          console.log('got url', url)
-          this.catImageUrl = url
-        },
-        (err) => { console.error(err) } 
+    this.fetchCatImage()
+  }
+
+  private fetchCatImage() {
+    this.isFetching = true
+
+    this.catApiService.getRandomCatMockSuccess()
+      .pipe(
+        finalize(() => {
+          this.isFetching = false
+        })
       )
-    })
+      .subscribe(c => {
+        c.match(
+          (cat) => { this.cat = cat },
+          (err) => { 
+            console.error(err) 
+            this.errorMsg = err
+            this.canUnbox = false
+          } 
+        )
+      })
   }
 
   private startCountdown() {
     this.countdown = 3
+
     const countdownInterval = setInterval(() => {
-      this.countdown--
-      console.log(this.countdown)
-      if (this.countdown === 0) {
-        clearInterval(countdownInterval)
-        console.log('we revealing')
-        this.catRevealed = true
+      if (this.countdown > 0) {
+        this.countdown--
       }
-    }, 1000)
+
+      if (this.countdown === 0 && !this.isFetching) {
+        clearInterval(countdownInterval);
+        this.canUnbox = true
+        this.isHidden = false
+      }
+
+      // disabling unboxing if there is an error
+      if (this.errorMsg !== null) {
+        this.canUnbox = false
+        this.isHidden = true
+        this.countdown = 0
+      }
+    }, 1000);
+  }
+
+  getCatClass() {
+    return 'cat-' + this.cat?.rarity.toLowerCase()
   }
 }

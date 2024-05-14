@@ -1,0 +1,20 @@
+.cat-common {
+    border: 0.25rem solid rgb(93, 215, 255);
+    box-shadow: 0 0 1rem rgb(93, 215, 255);
+}
+
+.cat-rare {
+    border: 0.25rem solid rgb(42, 42, 255);
+    box-shadow: 0 0 1rem rgb(42, 42, 255);
+}
+
+.cat-legendary {
+    border: 0.25rem solid rgb(198, 24, 241);
+    box-shadow: 0 0 1rem rgb(198, 24, 241);
+}
+
+.cat-mythic {
+    border: 0.25rem solid red;
+    box-shadow: 0 0 1rem red;
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
