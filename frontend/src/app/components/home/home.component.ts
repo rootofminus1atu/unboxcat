@@ -20,10 +20,12 @@ export class HomeComponent {
   isHidden: boolean = true
   canUnbox: boolean = true
   errorMsg: string | null = null
+  firstTime: boolean = true
 
   constructor(private catApiService: CatApiService) { }
 
   unbox() {
+    this.firstTime = false
     this.isHidden = true
     this.canUnbox = false
     this.cat = null
@@ -34,7 +36,7 @@ export class HomeComponent {
   private fetchCatImage() {
     this.isFetching = true
 
-    this.catApiService.getRandomCatMockSuccess()
+    this.catApiService.getRandomCat()
       .pipe(
         finalize(() => {
           this.isFetching = false

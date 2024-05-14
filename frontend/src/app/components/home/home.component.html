@@ -1,9 +1,9 @@
-<div class="text-center pt-8">
+<div class="text-center pt-8 px-4">
   <h1 class="text-5xl font-semibold py-4">Welcome to UnboxCat!</h1>
   <p>To unbox a cat click the <span class="font-semibold">Unbox</span> button down below!</p>
 </div>
 
-<div class="flex items-center flex-col gap-4 py-16">
+<div class="flex items-center flex-col gap-4 py-16 px-4">
   <div class="text-center">
     <p><span class="font-semibold">You unboxed:</span> {{ !isHidden ? cat?.fullName : '' }}</p>
     <p><span class="font-semibold">Rarity:</span> {{ !isHidden ? cat?.rarity : '' }}</p>
@@ -16,7 +16,9 @@
   >
     @if (isHidden) {
       <div class="bg-black text-white flex justify-center items-center h-full">
-        @if (errorMsg === null) {
+        @if (firstTime) {
+          <p></p>
+        } @else if (errorMsg === null) {
           <p>{{ countdown }}</p>
         } @else { 
           <p>Unboxing encountered an error: {{ errorMsg }}. Try some other time :(</p>
