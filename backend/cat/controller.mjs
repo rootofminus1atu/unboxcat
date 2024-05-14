@@ -39,10 +39,8 @@ async function getRandomCat(req, res) {
 
     const foundCat = await Cat.findById(cat.id)
     if (foundCat) {
-        console.log("================== OMG ==================")
         console.log("cat that was previously discovered:")
         console.log(foundCat.fullName, foundCat.rarity)
-        console.log("================== OMG ==================")
 
         return res.status(200).json(foundCat)
     }
