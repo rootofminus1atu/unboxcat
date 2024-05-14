@@ -1,0 +1,21 @@
+
+.rarity {
+    color: black;
+    font-weight: bold;
+}
+
+.rarity-common {
+    border-bottom: 2px solid rgb(93, 215, 255);
+}
+
+.rarity-common {
+    border-bottom: 2px solid rgb(42, 42, 255);
+}
+
+.rarity-legendary {
+    border-bottom: 2px solid rgb(198, 24, 241);
+}
+
+.rarity-mythic {
+    border-bottom: 2px solid red;
+}

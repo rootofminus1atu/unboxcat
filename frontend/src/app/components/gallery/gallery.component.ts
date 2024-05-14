@@ -30,12 +30,18 @@ export class GalleryComponent {
   updateFilters(filter: string, event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked
     const filters = this.selectedFilters.value
+
     if (isChecked) {
       this.selectedFilters.next([...filters, filter])
     } else {
       this.selectedFilters.next(filters.filter(f => f !== filter))
     }
+    
     console.log(this.selectedFilters.value)
   }
 
+
+  getRarityClass(rarity: string) {
+    return 'rarity-' + rarity.toLowerCase()
+  }
 }

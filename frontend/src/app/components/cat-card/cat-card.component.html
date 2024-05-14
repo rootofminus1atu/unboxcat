@@ -1,29 +1,35 @@
 <div 
-    class="inset-0 bg-center bg-cover h-full w-full cat flex items-end rounded-2xl" 
-    [class]="getCatClass()"
-    style="background-image: url('{{ cat.imgUrl }}');"
-    (click)="showModal(cat._id)"
+  class="inset-0 bg-center bg-cover h-full w-full cat flex items-end rounded-2xl" 
+  [class]="getCatClass()"
+  style="background-image: url('{{ cat.imgUrl }}');"
+  (click)="showModal(cat._id)"
 >
-    <div class="cat-text">
-        {{ cat.fullName }}
-    </div>
+  <div class="cat-text">
+    {{ cat.fullName }}
+  </div>
 </div>
 
 <dialog id="my_modal_{{cat._id}}" class="modal">
   <div class="modal-box w-11/12 max-w-5xl">
     <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
     </form>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
-        <img src="{{cat.imgUrl}}" alt="{{cat.fullName}}">
-        <div>
-            <h3 class="font-bold text-lg pb-2">{{ cat.fullName }}</h3>
-            <p><span class="font-semibold pb-2">Species</span> {{ cat.breed.name }}</p>
-            <p><span class="font-semibold pb-2">Origin:</span> {{ cat.breed.origin }}</p>
-            <p><span class="font-semibold pb-2">Alternative names:</span> {{ cat.breed.country_code }}</p>
-        </div>
+      <img src="{{cat.imgUrl}}" alt="{{cat.fullName}}" class="rounded-md">
+      <div>
+        <h3 class="font-bold text-lg pb-3">{{ cat.fullName }}</h3>
+        <p><span class="font-semibold pb-3">Species</span> {{ cat.breed.name }}</p>
+        <p><span class="font-semibold pb-3">Origin:</span> {{ cat.breed.origin }}</p>
+        <p>
+          <span class="font-semibold pb-3">Alternative names:</span> 
+          {{ cat.breed.alt_names.length > 0 ? cat.breed.alt_names.join(', ') : 'None' }}
+        </p>
+      </div>
     </div>
-    <p class="px-8 pb-8">{{ cat.breed.description }}</p>
+    <p class="px-8 pb-8">
+      {{ cat.breed.description }} 
+      <a href="{{ cat.breed.wikipedia_url }}" class="text-blue-500 underline">Read more...</a>
+    </p>
   </div>
   <form method="dialog" class="modal-backdrop">
     <button>close</button>

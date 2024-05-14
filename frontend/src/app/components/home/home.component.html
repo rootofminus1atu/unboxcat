@@ -1,1 +1,20 @@
-<p>home works!</p>
+<div class="text-center p-8 flex items-center justify-center flex-wrap">
+  <h1 class="text-5xl font-semibold py-4">Welcome to UnboxCat!</h1>
+</div>
+
+<div>
+  <p>unbox</p>
+
+  <div
+    style="background-image: url('{{ catImageUrl }}');"
+    class="h-40 w-40 border-2 border-red-500 inset-0 bg-center bg-cover"
+  >
+    @if (!catRevealed) {
+      <div class="bg-black text-white">{{ countdown }}</div>
+    }
+    
+  </div>
+
+  <button class="btn btn-neutral" (click)="unbox()" [disabled]="fetchingImage">Unbox</button>
+</div>
+

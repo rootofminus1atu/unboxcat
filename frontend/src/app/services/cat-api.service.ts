@@ -40,6 +40,15 @@ export class CatApiService {
       )
   }
 
+  getRandomCatMock(): Observable<Result<{ url: string }, string>> {
+    return this.http.get<{ url: string }[]>("https://api.thecatapi.com/v1/images/search")
+      .pipe(
+        tap(data => console.log('/cats/random message/error', JSON.stringify(data))),
+        map(cat => ok(cat[0])),
+        catchError(this.handleError)
+      )
+  }
+
   private handleError (e: HttpErrorResponse): Observable<Result<never, string>> {
     console.error('/cats error:', e.message);
     return of(err(e.message))
