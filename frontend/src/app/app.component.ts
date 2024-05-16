@@ -10,5 +10,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  
+
+  ngOnInit() {
+    console.log(process.env['ONRENDER_API_LINK'])
+  }
 }
