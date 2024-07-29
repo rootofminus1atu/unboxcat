@@ -1,4 +1,5 @@
 import { allFakers } from "@faker-js/faker"
+import { randomChoice, randomChoiceOrDefault } from "./rng.mjs"
 
 
 
@@ -85,15 +86,3 @@ function extractCountryCode(codeStr) {
     return null
 }
 
-function randomChoice(arr) {
-    const randomIndex = Math.floor(Math.random() * arr.length)
-    return arr[randomIndex]
-}
-
-function randomChoiceOrDefault(arr, defaultElem) {
-    if (arr.length === 0) {
-        return defaultElem
-    }
-
-    return randomChoice(arr)
-}
