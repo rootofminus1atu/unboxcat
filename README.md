@@ -1,6 +1,6 @@
 # UnboxCat
 
-UnboxCat is a web application built to discover and learn more about cats. It has an unboxing feature to discover new cats and a gallery to learn more about all the cats that have been unboxed so far. Check out the [live demo](https://unboxcat-demo.onrender.com) to see UnboxCat in action.
+UnboxCat is a web application built to discover and learn more about cats. It has an unboxing feature to discover new cats and a gallery to learn more about all the cats that have been unboxed so far. Check out the [live demo](https://unboxcat.onrender.com) to see UnboxCat in action.
 
 ![screenshot](images/screenshot.png)
 
