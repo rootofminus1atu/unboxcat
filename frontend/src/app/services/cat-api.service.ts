@@ -8,8 +8,7 @@ import { Cat } from '../interfaces/cat';
   providedIn: 'root'
 })
 export class CatApiService {
-  private urlBase = "http://63.33.201.73:3000"
-  // private urlBase = "http://localhost:3000"
+  private urlBase = "/backend"
   private url = (path: string) => `${this.urlBase}/cats${path}`
 
   constructor(private http: HttpClient) { }

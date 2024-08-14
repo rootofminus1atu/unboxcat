@@ -1,8 +1,10 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import { fileURLToPath } from 'url';
 import { catRoutes } from './cat/controller.mjs'
 import cors from 'cors'
+
 
 dotenv.config()
 const port = process.env.PORT || 3000

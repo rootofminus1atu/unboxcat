@@ -1,0 +1,17 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: frontend
+    src: frontend
+    engine: static
+    primary: true
+    commands:
+      - npm install @angular/cli@17 && npm run build
+    serve: dist/frontend/browser
+
+  - name: backend
+    src: backend
+    engine: nodejs16
+    run: node server.mjs
+    dev: node --watch server.mjs
+  
