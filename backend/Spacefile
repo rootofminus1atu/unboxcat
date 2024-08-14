@@ -1,0 +1,15 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: backend
+    src: ./
+    engine: nodejs16
+    primary: true
+    run: node server.mjs
+    dev: node --watch index.mjs
+    presets:
+      env:
+        - name: API_KEY
+          default: "no"
+        - name: MONGO_URI
+          default: "no"
