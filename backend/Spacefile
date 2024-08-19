@@ -5,6 +5,7 @@ micros:
     src: ./
     engine: nodejs16
     primary: true
+    public: true
     run: node server.mjs
     dev: node --watch index.mjs
     presets:
