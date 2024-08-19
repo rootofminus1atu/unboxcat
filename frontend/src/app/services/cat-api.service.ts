@@ -8,14 +8,14 @@ import { Cat } from '../interfaces/cat';
   providedIn: 'root'
 })
 export class CatApiService {
-  private urlBase = "https://unboxcatapi-1-b3149915.deta.app"
+  private urlBase = "https://servicenexus.shuttleapp.rs"
   // private urlBase = "http://localhost:3000"
   private url = (path: string) => `${this.urlBase}/cats${path}`
 
   constructor(private http: HttpClient) { }
 
   getAllCats(): Observable<Result<Cat[], string>> {
-    return this.http.get<Cat[]>(this.url("/"))
+    return this.http.get<Cat[]>(this.url(""))
       .pipe(
         tap(data => console.log('/cats/ message/error', JSON.stringify(data))),
         map(cat => ok(cat)),
