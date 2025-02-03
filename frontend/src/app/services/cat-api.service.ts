@@ -8,7 +8,7 @@ import { Cat } from '../interfaces/cat';
   providedIn: 'root'
 })
 export class CatApiService {
-  private urlBase = "https://servicenexus.shuttleapp.rs"
+  private urlBase = "https://servicenexus-hhq1.shuttle.app"
   // private urlBase = "http://localhost:3000"
   private url = (path: string) => `${this.urlBase}/cats${path}`
 
